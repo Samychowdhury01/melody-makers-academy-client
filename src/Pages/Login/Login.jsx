@@ -5,6 +5,7 @@ import loginImg from "../../assets/login/login.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -84,6 +85,7 @@ const Login = () => {
                 </Link>
               </label>
             </form>
+            <SocialLogin/>
           </div>
         </div>
       </div>
