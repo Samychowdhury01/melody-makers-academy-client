@@ -42,7 +42,7 @@ const Navbar = () => {
             </div>
   
       <li>
-       {user?  <div className="flex justify-center"><button onClick={handleSignOut} className='btn btn-sm bg-[#86E5DC] text-black hover:link-accent hover:bg-black'>Logout</button></div> :  <ActiveLink to='/login'>Login</ActiveLink>}
+       {user?  <div className="flex justify-center"><button onClick={handleSignOut} className='btn btn-sm bg-[#86E5DC] text-black hover:link-accent hover:bg-black transition-all duration-700'>Logout</button></div> :  <ActiveLink to='/login'>Login</ActiveLink>}
       </li>
     </>
   );

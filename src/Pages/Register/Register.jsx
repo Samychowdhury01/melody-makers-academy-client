@@ -198,7 +198,7 @@ const Register = () => {
                 <input
                   type="submit"
                   value="Sign Up"
-                  className="btn bg-[#86E5DC] text-black border-none rounded-3xl"
+                  className="btn bg-[#86E5DC] text-black  border-none rounded-3xl"
                 />
               </div>
               <label className="mt-3 text-lg text-gray-400">

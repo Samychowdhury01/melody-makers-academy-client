@@ -7,19 +7,33 @@ import { toast } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+  const {loginWithEmail} = useAuth()
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     const { email, password } = data;
+    loginWithEmail(email, password)
+    .then(() =>{
+      toast.success("Login Successful");
+      navigate(location?.state?.from?.pathname || "/");
+      reset();
+    })
+    .catch(error => {
+      const message = error.message;
+      setErrorMessage(message);
+    })
+
 
     setErrorMessage("");
   };
@@ -86,7 +100,7 @@ const Login = () => {
                 <input
                   type="submit"
                   value="Login"
-                  className="btn bg-[#86E5DC] text-black border-none rounded-3xl"
+                  className="btn bg-[#86E5DC] text-black  rounded-3xl hover:bg-[#1f1f1f] hover:text-[#86E5DC] transition-all duration-500"
                 />
               </div>
               <label className="mt-3 text-lg text-gray-400">
