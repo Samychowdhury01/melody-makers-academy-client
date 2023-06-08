@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import useAuth from "../../Hooks/useAuth";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
+  const {user} = useAuth()
   const navItem = (
     <>
       <li>
-        <a>Item 1</a>
+        <a>Home</a>
       </li>
       <li>
         item 3
