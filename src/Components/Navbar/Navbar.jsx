@@ -1,19 +1,27 @@
 import React, { useContext } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { AuthContext } from "../../Providers/AuthProvider";
+import ActiveLink from "./ActiveLink";
 
 const Navbar = () => {
   const {user} = useAuth()
   const navItem = (
     <>
       <li>
-        <a>Home</a>
+        <ActiveLink> Home</ActiveLink>
+       
       </li>
       <li>
-        item 3
+       <ActiveLink>Instructors</ActiveLink>
       </li>
       <li>
-        <a>Item 3</a>
+        <ActiveLink>Classes</ActiveLink>
+      </li>
+      <li>
+       {user &&  <ActiveLink>Dashboard</ActiveLink>}
+      </li>
+      <li>
+       {user?  <ActiveLink>logout</ActiveLink> :  <ActiveLink>Login</ActiveLink>}
       </li>
     </>
   );
@@ -44,15 +52,12 @@ const Navbar = () => {
             {navItem}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a className="btn btn-ghost normal-case text-xl">MelodyMakers Academy</a>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           {navItem}
         </ul>
-      </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
       </div>
     </div>
   );
