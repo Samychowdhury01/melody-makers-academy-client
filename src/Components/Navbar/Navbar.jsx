@@ -8,25 +8,25 @@ const Navbar = () => {
   const navItem = (
     <>
       <li>
-        <ActiveLink> Home</ActiveLink>
+        <ActiveLink to='/'> Home</ActiveLink>
        
       </li>
       <li>
-       <ActiveLink>Instructors</ActiveLink>
+       <ActiveLink to='/instructors'>Instructors</ActiveLink>
       </li>
       <li>
-        <ActiveLink>Classes</ActiveLink>
+        <ActiveLink to='/classes'>Classes</ActiveLink>
       </li>
       <li>
-       {user &&  <ActiveLink>Dashboard</ActiveLink>}
+       {user &&  <ActiveLink to='/dashboard'>Dashboard</ActiveLink>}
       </li>
       <li>
-       {user?  <ActiveLink>logout</ActiveLink> :  <ActiveLink>Login</ActiveLink>}
+       {user?  <ActiveLink>logout</ActiveLink> :  <ActiveLink to='/login'>Login</ActiveLink>}
       </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-black text-white">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -52,7 +52,7 @@ const Navbar = () => {
             {navItem}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">MelodyMakers Academy</a>
+        <a className="btn btn-ghost normal-case text-3xl nav-logo-text" >MelodyMakers Academy</a>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

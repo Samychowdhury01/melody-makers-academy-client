@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const ActiveLink = ({to, children}) => {
     return (
         <NavLink to={to} className={({ isActive}) =>
-      `text-xl  uppercase ${ isActive ? "text-yellow-500" : ""}`
+      `text-xl  normal-case ${ isActive ? "bg-[#86E5DC] text-black" : ""}`
       }>
             {children}
         </NavLink>
