@@ -1,9 +1,19 @@
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import ActiveLink from "./ActiveLink";
 
 const Navbar = () => {
-  const {user} = useAuth()
+  const {user, logOut} = useAuth()
+  const handleSignOut = () =>{
+    logOut()
+    .then(() =>{
+      toast.success('Sign Out Successful')
+    })
+    .catch(error =>{
+      toast.error('Something is wrong. Try Again !!')
+    })
+}
   const navItem = (
     <>
       <li>
@@ -19,13 +29,28 @@ const Navbar = () => {
       <li>
        {user &&  <ActiveLink to='/dashboard'>Dashboard</ActiveLink>}
       </li>
+      <div className="tooltip" data-tip={`${user?.displayName || ""}`}>
+    <div>
+              {user && (
+                <img
+                  src={user?.photoURL}
+                  alt="profile-photo"
+                  className="rounded-full w-14 h-14"
+                />
+              )}
+            </div>
+            </div>
+  
       <li>
-       {user?  <ActiveLink>logout</ActiveLink> :  <ActiveLink to='/login'>Login</ActiveLink>}
+       {user?  <div className="flex justify-center"><button onClick={handleSignOut} className='btn btn-sm bg-[#86E5DC] text-black hover:link-accent hover:bg-black'>Logout</button></div> :  <ActiveLink to='/login'>Login</ActiveLink>}
       </li>
     </>
   );
+
+
+
   return (
-    <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white max-w-screen-xl">
+    <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white max-w-screen-xl md:pt-5">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -51,7 +76,7 @@ const Navbar = () => {
             {navItem}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-2xl md:text-3xl nav-logo-text" >MelodyMakers Academy</a>
+        <a className="btn btn-ghost normal-case text-2xl md:text-3xl nav-logo-text md:w-2/3" >MelodyMakers Academy</a>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

@@ -19,11 +19,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const {email, password} = data
+    const { email, password } = data;
 
-    setErrorMessage('')
+    setErrorMessage("");
   };
-console.log(errors)
+
   return (
     <>
       <Helmet>
@@ -90,7 +90,7 @@ console.log(errors)
                 />
               </div>
               <label className="mt-3 text-lg text-gray-400">
-                <span>New here?  </span>
+                <span>New here? </span>
                 <Link
                   to="/register"
                   state={location?.state}

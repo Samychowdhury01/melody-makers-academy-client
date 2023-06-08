@@ -7,9 +7,14 @@ import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useAuth();
+  const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+
+  const { createUser, updateUserProfile, logOut } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
   const location = useLocation();
@@ -22,12 +27,48 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    const { name, email, password, captcha, photo } = data;
+    const { name, email, password, confirmPassword, photo } = data;
+
     setErrorMessage("");
+    if (password !== confirmPassword) {
+      setErrorMessage("password didn't match");
+      return;
+    }
+
+    createUser(email, password)
+      .then((result) => {
+        const formData = new FormData();
+        formData.append("image", photo[0]);
+        axios.post(img_hosting_url, formData).then((imgData) => {
+          const image = imgData.data.data.display_url;
+          if (imgData.data.success) {
+            updateUserProfile(email, image).then(() => {
+              const createdUser = { email, name, image, role: "student" };
+              axios
+                .post("http://localhost:5000/users", createdUser)
+                .then((data) => {
+                  if (data.data.insertedId) {
+                    reset();
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "User created successfully.",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    logOut().then(() => {
+                      navigate("/login");
+                    });
+                  }
+                });
+            });
+          }
+        });
+      })
+      .catch((error) => setErrorMessage(error.message));
   };
-
-
 
   return (
     <>
@@ -42,7 +83,9 @@ const Register = () => {
           </div>
           <div className="md:w-2/3 bg-[#1f1f1f] rounded-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-              <h1 className="text-center text-4xl font-bold text-white">Sign Up</h1>
+              <h1 className="text-center text-4xl font-bold text-white">
+                Sign Up
+              </h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-gray-400">Name</span>
@@ -63,11 +106,10 @@ const Register = () => {
                   <span className="label-text text-gray-400">Photo URL</span>
                 </label>
                 <input
-                  type="text"
+                  type="file"
                   {...register("photo", { required: true })}
-                  name="photo"
                   placeholder="Photo URL"
-                  className="input input-bordered"
+                  className="w-full bg-base-300"
                 />
                 {errors.photo && (
                   <span className="text-red-500">This field is required</span>
@@ -133,7 +175,9 @@ const Register = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text text-gray-400">Confirm Password</span>
+                  <span className="label-text text-gray-400">
+                    Confirm Password
+                  </span>
                 </label>
                 <input
                   type={showPass ? "text" : "password"}
