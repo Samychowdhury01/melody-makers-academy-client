@@ -2,7 +2,7 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-8">
+    <footer className="bg-gray-950 text-white py-8">
       <div className="container mx-auto flex flex-wrap">
         <div className="w-full md:w-1/2 lg:w-1/3 px-4">
           <h2 className="text-2xl font-bold mb-4">MelodyMakers Academy</h2>

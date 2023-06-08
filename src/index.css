@@ -9,6 +9,9 @@
 *{
     font-family: 'Poppins', sans-serif;
 }
+body{
+    background-color: black;
+}
 
 .nav-logo-text {
     font-family: "Cinzel", serif;

@@ -7,9 +7,9 @@ import { Helmet } from "react-helmet-async";
 const ErrorPage = () => {
   const { error, status } = useRouteError();
   return (
-    <section className="flex items-center justify-center md:h-[100vh]">
+    <section className="flex items-center justify-center md:h-[100vh] bg-white">
     <Helmet>
-        <title>ERROR PAGE</title>
+        <title> MelodyMakers Academy | ERROR PAGE</title>
     </Helmet>
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-20">
         <div className="md:w-2/3 md:h-[500px]">
