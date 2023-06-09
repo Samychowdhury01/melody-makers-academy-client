@@ -3,17 +3,17 @@ import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
 
-const useInstructor = () => {
+const useStudent = () => {
 const {user} = useAuth()
 const [axiosSecure] = useAxiosSecure()
-const {isLoading : isInstructorLoading, data : isInstructor} = useQuery({
+const {isLoading : isStudentLoading, data : isStudent} = useQuery({
     queryKey: ['isAdmin', user?.email],
     queryFn: async () =>{
-        const response = await axiosSecure.get(`/users/instructor/${user?.email}`)
+        const response = await axiosSecure.get(`/users/student/${user?.email}`)
         return response.admin
     }
 })
-return [isInstructorLoading, isInstructor]
+return [isStudentLoading, isStudent]
 };
 
-export default useInstructor;
+export default useStudent;
