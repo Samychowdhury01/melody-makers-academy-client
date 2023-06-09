@@ -14,7 +14,7 @@ useEffect(() =>{
         const token = localStorage.getItem('access-token')
         
         if(token){
-            request.headers.authentication = `Bearer ${token}`
+            request.headers.authorization = `Bearer ${token}`
         }
         return request;
       });
