@@ -31,7 +31,7 @@ useEffect(() =>{
         }
       );
 },[axiosSecure, logOut, navigate])
-    
+    return [axiosSecure]
 };
 
 export default useAxiosSecure;
