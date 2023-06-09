@@ -7,13 +7,13 @@ const useInstructor = () => {
 const {user} = useAuth()
 const [axiosSecure] = useAxiosSecure()
 const {isLoading : isInstructorLoading, data : isInstructor} = useQuery({
-    queryKey: ['isAdmin', user?.email],
+    queryKey: ['isInstructor', user?.email],
     queryFn: async () =>{
         const response = await axiosSecure.get(`/users/instructor/${user?.email}`)
-        return response.admin
+        return response.instructor
     }
 })
-return [isInstructorLoading, isInstructor]
+return [isInstructor, isInstructorLoading]
 };
 
 export default useInstructor;

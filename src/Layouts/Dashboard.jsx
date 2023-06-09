@@ -1,8 +1,12 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
 import useInstructor from "../Hooks/useInstructor";
 
 const Dashboard = () => {
+
+
+
+    
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   return (
@@ -23,17 +27,19 @@ const Dashboard = () => {
         <ul className="menu p-4 w-80 h-full bg-[#1f1f1f] text-white">
           {/* Sidebar content here */}
           <li>
-            <div className="flex flex-col items-start text-white md:mb-10 nav-logo-text">
-              <h1 className="styled-text md:text-2xl font-extrabold">
-                MelodyMakers
-              </h1>
-              <h3
-                className="styled-text md:text-lg"
-                style={{ letterSpacing: "0.38em" }}
-              >
-                Academy
-              </h3>
-            </div>
+            <Link to='/'>
+              <div className="flex flex-col items-start text-white md:mb-10 nav-logo-text">
+                <h1 className="styled-text md:text-2xl font-extrabold">
+                  MelodyMakers
+                </h1>
+                <h3
+                  className="styled-text md:text-lg"
+                  style={{ letterSpacing: "0.38em" }}
+                >
+                  Academy
+                </h3>
+              </div>
+            </Link>
           </li>
           {isAdmin ? (
             // for admin
@@ -68,26 +74,26 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/"
+                  to="/my-classes"
                   className={({ isActive }) =>
                     `text-lg normal-case ${
                       isActive ? "bg-[#86E5DC] text-black" : ""
                     }`
                   }
                 >
-                  Manage Users
+                  My Classes
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/"
+                  to="/dashboard/add-a-class"
                   className={({ isActive }) =>
                     `text-lg normal-case ${
                       isActive ? "bg-[#86E5DC] text-black" : ""
                     }`
                   }
                 >
-                  Manage Classes
+                  Add a Class
                 </NavLink>
               </li>
             </>
@@ -103,7 +109,7 @@ const Dashboard = () => {
                     }`
                   }
                 >
-                  Selected Classes
+                  My Selected Classes
                 </NavLink>
               </li>
               <li>
@@ -115,7 +121,19 @@ const Dashboard = () => {
                     }`
                   }
                 >
-                  Manage Classes
+                  My Enrolled Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `text-lg normal-case hover:link-accent ${
+                      isActive ? "bg-[#86E5DC] text-black" : ""
+                    }`
+                  }
+                >
+                  Payment History
                 </NavLink>
               </li>
             </>
@@ -127,7 +145,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-
-

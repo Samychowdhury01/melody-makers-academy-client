@@ -3,11 +3,13 @@ import {
   } from "react-router-dom";
 import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
+import AddAClass from "../Pages/Dashboad/AddAClass/AddAClass";
 import SelectedClasses from "../Pages/Dashboad/SelectedClasses/SelectedClasses";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -37,7 +39,12 @@ const router = createBrowserRouter([
         {
           path: 'selected-classes',
           element: <SelectedClasses/>
-        }
+        },
+        {
+          path: 'add-a-class',
+          element:<InstructorRoute> <AddAClass/></InstructorRoute>
+        },
+        
       ]
     }
   ]);
