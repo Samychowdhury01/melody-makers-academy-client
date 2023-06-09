@@ -28,7 +28,7 @@ const Dashboard = () => {
           {/* Sidebar content here */}
           <li>
             <Link to='/'>
-              <div className="flex flex-col items-start text-white md:mb-10 nav-logo-text">
+              <div className="flex flex-col items-start text-white md:mb-10 styled-text">
                 <h1 className="styled-text md:text-2xl font-extrabold">
                   MelodyMakers
                 </h1>
@@ -74,7 +74,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
-                  to="/my-classes"
+                  to="/dashboard/my-classes"
                   className={({ isActive }) =>
                     `text-lg normal-case ${
                       isActive ? "bg-[#86E5DC] text-black" : ""

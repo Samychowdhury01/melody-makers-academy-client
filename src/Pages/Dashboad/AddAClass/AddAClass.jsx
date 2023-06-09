@@ -67,6 +67,7 @@ const AddAClass = () => {
         <div className="hero-content md:w-full p-4 md:p-10">
           <div className="card md:w-full shadow-2xl shadow-neutral-600 bg-base-300">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                <h1 className="text-4xl styled-text text-center">Add A class</h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Class name</span>
@@ -162,7 +163,7 @@ const AddAClass = () => {
               </div>
               <div className="form-control mt-6">
                 <button className="btn bg-[#86E5DC] text-black rounded-3xl hover:bg-[#1f1f1f] hover:text-[#86E5DC] transition-all duration-500">
-                  Add A Class
+                  Add Class
                 </button>
               </div>
             </form>

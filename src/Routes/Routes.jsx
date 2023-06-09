@@ -4,6 +4,7 @@ import {
 import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
 import AddAClass from "../Pages/Dashboad/AddAClass/AddAClass";
+import MyClasses from "../Pages/Dashboad/MyClasses/MyClasses";
 import SelectedClasses from "../Pages/Dashboad/SelectedClasses/SelectedClasses";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         {
           path: 'add-a-class',
           element:<InstructorRoute> <AddAClass/></InstructorRoute>
+        },
+        {
+          path: 'my-classes',
+          element:<InstructorRoute><MyClasses/></InstructorRoute>
         },
         
       ]

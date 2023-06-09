@@ -76,7 +76,7 @@ const Navbar = () => {
             {navItem}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-2xl md:text-3xl nav-logo-text md:w-2/3" >MelodyMakers Academy</a>
+        <a className="btn btn-ghost normal-case text-2xl md:text-3xl styled-text md:w-2/3" >MelodyMakers Academy</a>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
