@@ -1,7 +1,9 @@
 import {
     createBrowserRouter,
   } from "react-router-dom";
+import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
+import SelectedClasses from "../Pages/Dashboad/SelectedClasses/SelectedClasses";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -27,7 +29,16 @@ const router = createBrowserRouter([
         },
       ]
     },
-    
+    {
+      path: '/dashboard',
+      element: <Dashboard/>,
+      children: [
+        {
+          path: 'selected-classes',
+          element: <SelectedClasses/>
+        }
+      ]
+    }
   ]);
 
   export default router
