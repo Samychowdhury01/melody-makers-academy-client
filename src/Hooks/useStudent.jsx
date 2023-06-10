@@ -4,10 +4,11 @@ import useAxiosSecure from "./useAxiosSecure";
 
 
 const useStudent = () => {
-const {user} = useAuth()
+const {user, loading} = useAuth()
 const [axiosSecure] = useAxiosSecure()
 const {isLoading : isStudentLoading, data : isStudent} = useQuery({
     queryKey: ['isStudent', user?.email],
+    enabled: !loading,
     queryFn: async () =>{
         const response = await axiosSecure.get(`/users/role/${user?.email}`)
         return response.student

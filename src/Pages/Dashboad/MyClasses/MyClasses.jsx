@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FcApproval, FcCancel, FcClock } from "react-icons/fc";
+import { Link } from "react-router-dom";
 const MyClasses = () => {
   const { user, loading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
@@ -15,7 +16,6 @@ const MyClasses = () => {
     },
   });
   // TODO: have to add update functionalities
-  console.log(myClasses)
   return (
     <div className="relative h-[100vh] bg-base-300 p-5">
       <div className="overflow-x-auto px-2 py-5 center-div">
@@ -53,10 +53,10 @@ const MyClasses = () => {
                     </>
                   ) : classData?.status === "denied" ? (
                     <>
-                    <div className="flex items-center gap-2 text-error">
-                    <FcCancel className="text-lg"/> <span>Denied</span>
-                    </div>
-                  </>
+                      <div className="flex items-center gap-2 text-error">
+                        <FcCancel className="text-lg" /> <span>Denied</span>
+                      </div>
+                    </>
                   ) : (
                     <>
                       <div className="flex items-center gap-2 text-warning">
@@ -66,9 +66,12 @@ const MyClasses = () => {
                   )}
                 </td>
                 <td>{classData.feedback}</td>
-                <td>update</td>
+                <td>
+                  <Link><button className="btn btn-neutral btn-sm">Update</button></Link>
+                </td>
               </tr>
-            ))}
+            ))
+            }
           </tbody>
         </table>
       </div>

@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
+import useAdmin from "../../Hooks/useAdmin";
 import useAuth from "../../Hooks/useAuth";
+import useInstructor from "../../Hooks/useInstructor";
 import ActiveLink from "./ActiveLink";
 
 const Navbar = () => {
   const {user, logOut} = useAuth()
+  const [isAdmin] = useAdmin()
+  const [isInstructor] = useInstructor()
   const handleSignOut = () =>{
     logOut()
     .then(() =>{
@@ -27,7 +31,7 @@ const Navbar = () => {
         <ActiveLink to='/classes'>Classes</ActiveLink>
       </li>
       <li>
-       {user &&  <ActiveLink to='/dashboard'>Dashboard</ActiveLink>}
+       {user &&  <ActiveLink to={`/dashboard/${isAdmin ? 'manage-classes' : isInstructor ? 'my-classes' : 'selected-classes'}`}>Dashboard</ActiveLink>}
       </li>
       <div className="tooltip" data-tip={`${user?.displayName || ""}`}>
     <div>
@@ -50,7 +54,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white max-w-screen-xl md:pt-5">
+    <div className="navbar bg-opacity-30 bg-black text-white max-w-screen-xl md:pt-5">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

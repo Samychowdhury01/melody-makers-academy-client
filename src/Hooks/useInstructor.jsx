@@ -4,10 +4,11 @@ import useAxiosSecure from "./useAxiosSecure";
 
 
 const useInstructor = () => {
-const {user} = useAuth()
+const {user, loading} = useAuth()
 const [axiosSecure] = useAxiosSecure()
 const {isLoading : isInstructorLoading, data : isInstructor} = useQuery({
     queryKey: ['isInstructor', user?.email],
+    enabled: !loading,
     queryFn: async () =>{
         const response = await axiosSecure.get(`/users/role/${user?.email}`)
         return response?.instructor
@@ -17,3 +18,4 @@ return [isInstructor, isInstructorLoading]
 };
 
 export default useInstructor;
+
