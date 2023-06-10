@@ -14,6 +14,7 @@ const MyClasses = () => {
       return response;
     },
   });
+  // TODO: have to add update functionalities
   return (
     <div className="relative h-[100vh] bg-base-300 p-5">
      <div className="overflow-x-auto p-5 center-div">

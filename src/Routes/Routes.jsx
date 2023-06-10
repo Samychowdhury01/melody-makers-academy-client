@@ -4,12 +4,14 @@ import {
 import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
 import AddAClass from "../Pages/Dashboad/AddAClass/AddAClass";
+import ManageUsers from "../Pages/Dashboad/ManageUsers/ManageUsers";
 import MyClasses from "../Pages/Dashboad/MyClasses/MyClasses";
 import SelectedClasses from "../Pages/Dashboad/SelectedClasses/SelectedClasses";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
 
@@ -48,6 +50,10 @@ const router = createBrowserRouter([
         {
           path: 'my-classes',
           element:<InstructorRoute><MyClasses/></InstructorRoute>
+        },
+        {
+          path: 'manage-users',
+          element:<AdminRoute><ManageUsers/></AdminRoute>
         },
         
       ]

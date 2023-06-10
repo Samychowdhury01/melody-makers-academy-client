@@ -46,7 +46,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/"
+                  to="/dashboard/manage-users"
                   className={({ isActive }) =>
                     `text-lg normal-case ${
                       isActive ? "bg-[#86E5DC] text-black" : ""
