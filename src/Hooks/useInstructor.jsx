@@ -10,7 +10,7 @@ const {isLoading : isInstructorLoading, data : isInstructor} = useQuery({
     queryKey: ['isInstructor', user?.email],
     queryFn: async () =>{
         const response = await axiosSecure.get(`/users/role/${user?.email}`)
-        return response.instructor
+        return response?.instructor
     }
 })
 return [isInstructor, isInstructorLoading]

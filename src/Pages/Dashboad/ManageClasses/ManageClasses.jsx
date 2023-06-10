@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// TODO: have to add functionalities for action buttons
+import { FcApproval, FcCancel } from "react-icons/fc";
+// TODO: have to add icons
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
   const { data: classes, refetch } = useQuery({
@@ -12,14 +14,87 @@ const ManageClasses = () => {
     },
   });
 
+  // handle approval button functionalities
+  const handleClassApprove = (data) => {
+    console.log(data);
+    axiosSecure
+      .patch(`/classes/status?id=${data?._id}&status=approved`)
+      .then((response) => {
+          if (response.modifiedCount > 0) {
+            refetch()
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: `You have successfully added the class`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
+        console.log(response);
+      });
+  };
+  // handle Deny button functionalities
+  const handleClassDeny = (data) => {
+    console.log(data);
+    axiosSecure
+      .patch(`/classes/status?id=${data?._id}&status=denied`)
+      .then((response) => {
+          if (response.modifiedCount > 0) {
+            refetch()
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: `You have successfully added the class`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
+        console.log(response);
+      });
+  };
+
+  // handle feedback
+  const handleFeedback = async (data) => {
+    const { value: text } = await Swal.fire({
+      input: "textarea",
+      inputLabel: "Message",
+      inputPlaceholder: "Type your message here...",
+      inputAttributes: {
+        "aria-label": "Type your message here",
+      },
+      showCancelButton: true,
+    });
+
+    if (text) {
+      console.log(text)
+      axiosSecure
+      .patch(`/classes/feedback/${data?._id}`, {feedback:text})
+      .then((response) => {
+          if (response.modifiedCount > 0) {
+            refetch()
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: `You have successfully added a feedback`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
+        console.log(response);
+      });
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-base-300">
       <div className="px-4 py-10 center-div md:px-8 lg:px-12">
-        <h1 className="text-4xl styled-text text-center mb-10">All Classes Added By Instructors</h1>
+        <h1 className="text-4xl styled-text text-center mb-10">
+          All Classes Added By Instructors
+        </h1>
         <div className="overflow-x-auto">
           <table className="table bg-base-300 drop-shadow-xl table-auto">
             <thead>
-              <tr className="text-lg">
+              <tr className="text-lg text-center">
                 <th>No.</th>
                 <th>Class image</th>
                 <th>Class Name</th>
@@ -51,13 +126,41 @@ const ManageClasses = () => {
                   <td>{classData?.availableSeats}</td>
                   <td>{classData?.price}</td>
                   <td>
-                    <button className="btn btn-sm">Approve</button>
+                    {classData.status === "approved" ? (
+                      <>
+                        <div className="flex items-center gap-2 text-success">
+                        <FcApproval className="text-lg"/> <span>Approved</span>
+                        </div>
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => handleClassApprove(classData)}
+                        className="btn btn-success btn-sm"
+                      >
+                        Approve
+                      </button>
+                    )}
                   </td>
                   <td>
-                    <button className="btn btn-sm">Deny</button>
+                    {classData?.status === "denied" ? (
+                      <>
+                      <div className="flex items-center gap-2 text-error">
+                      <FcCancel className="text-lg"/> <span>Denied</span>
+                      </div>
+                    </>
+                    ) : (
+                      <button 
+                      onClick={()=> handleClassDeny(classData)}
+                      className="btn btn-error btn-sm">Deny</button>
+                    )}
                   </td>
                   <td>
-                    <button className="btn btn-sm">Feedback</button>
+                    <button
+                      onClick={() => handleFeedback(classData)}
+                      className="btn btn-warning btn-sm"
+                    >
+                      Feedback
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -1,6 +1,4 @@
-import {
-    createBrowserRouter,
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
 import AddAClass from "../Pages/Dashboad/AddAClass/AddAClass";
@@ -17,52 +15,71 @@ import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main/>,
-      errorElement: <ErrorPage/>,
-      children: [
-        {
-            path: '/',
-            element: <Home/>
-        },
-        {
-            path: '/login',
-            element: <Login/>
-        },
-        {
-            path: '/register',
-            element: <Register/>
-        },
-      ]
-    },
-    {
-      path: '/dashboard',
-      element: <PrivateRoute><Dashboard/></PrivateRoute>,
-      children: [
-        {
-          path: 'selected-classes',
-          element: <SelectedClasses/>
-        },
-        {
-          path: 'add-a-class',
-          element:<InstructorRoute> <AddAClass/></InstructorRoute>
-        },
-        {
-          path: 'my-classes',
-          element:<InstructorRoute><MyClasses/></InstructorRoute>
-        },
-        {
-          path: 'manage-users',
-          element:<AdminRoute><ManageUsers/></AdminRoute>
-        },
-        {
-          path: 'manage-classes',
-          element:<AdminRoute><ManageClasses/></AdminRoute>
-        },
-        
-      ]
-    }
-  ]);
+  {
+    path: "/",
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "selected-classes",
+        element: <SelectedClasses />,
+      },
+      {
+        path: "add-a-class",
+        element: (
+          <InstructorRoute>
+            <AddAClass />
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "my-classes",
+        element: (
+          <InstructorRoute>
+            <MyClasses />
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-classes",
+        element: (
+          <AdminRoute>
+            <ManageClasses />
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
+]);
 
-  export default router
+export default router;
