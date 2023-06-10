@@ -4,6 +4,7 @@ import {
 import Dashboard from "../Layouts/Dashboard";
 import Main from "../Layouts/Main";
 import AddAClass from "../Pages/Dashboad/AddAClass/AddAClass";
+import ManageClasses from "../Pages/Dashboad/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboad/ManageUsers/ManageUsers";
 import MyClasses from "../Pages/Dashboad/MyClasses/MyClasses";
 import SelectedClasses from "../Pages/Dashboad/SelectedClasses/SelectedClasses";
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
         {
           path: 'manage-users',
           element:<AdminRoute><ManageUsers/></AdminRoute>
+        },
+        {
+          path: 'manage-classes',
+          element:<AdminRoute><ManageClasses/></AdminRoute>
         },
         
       ]

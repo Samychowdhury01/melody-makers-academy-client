@@ -46,6 +46,18 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
+                  to="/dashboard/manage-classes"
+                  className={({ isActive }) =>
+                    `text-lg normal-case ${
+                      isActive ? "bg-[#86E5DC] text-black" : ""
+                    }`
+                  }
+                >
+                  Manage Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/manage-users"
                   className={({ isActive }) =>
                     `text-lg normal-case ${
@@ -54,18 +66,6 @@ const Dashboard = () => {
                   }
                 >
                   Manage Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    `text-lg normal-case ${
-                      isActive ? "bg-[#86E5DC] text-black" : ""
-                    }`
-                  }
-                >
-                  Manage Classes
                 </NavLink>
               </li>
             </>
