@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 // TODO:have to implement delete and pay function
@@ -14,7 +15,32 @@ const SelectedClasses = () => {
         return response;
       },
     });
-    console.log(selectedClasses)
+    
+
+    // handle delete selected class
+    const handleDeleteClass =(id) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/my-classes/${id}`)
+            .then((data) => {
+              if (data.deletedCount > 0) {
+                  refetch()
+                Swal.fire("Deleted!", "Your item has been deleted.", "success");
+              }
+            });
+        }
+      });
+    }
+
+
     return (
         <div className="relative h-[100vh] bg-base-300 ">
       <div className="overflow-x-auto px-4 py-10 center-div">
@@ -54,7 +80,9 @@ const SelectedClasses = () => {
                   <button className="btn btn-neutral btn-sm normal-case">Pay</button>
                 </td>
                 <td>
-                  <button className="btn btn-error btn-sm normal-case">delete</button>
+                  <button 
+                  onClick={()=> handleDeleteClass(selectedClass?._id)}
+                  className="btn btn-error btn-sm normal-case">delete</button>
                 </td>
               </tr>
             ))}
