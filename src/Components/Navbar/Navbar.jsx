@@ -1,60 +1,73 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import useAdmin from "../../Hooks/useAdmin";
+import useUserRole from "../../Hooks/useUserRole";
 import useAuth from "../../Hooks/useAuth";
-import useInstructor from "../../Hooks/useInstructor";
 import ActiveLink from "./ActiveLink";
 
 const Navbar = () => {
-  const {user, logOut} = useAuth()
-  const [isAdmin] = useAdmin()
-  const [isInstructor] = useInstructor()
-  const navigate = useNavigate()
-  const handleSignOut = () =>{
+  const { user, logOut } = useAuth();
+  const { isAdmin, isInstructor } = useUserRole();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
     logOut()
-    .then(() =>{
-      navigate('/')
-      toast.success('Sign Out Successful')
-    })
-    .catch(error =>{
-      toast.error('Something is wrong. Try Again !!')
-    })
-}
-  const navItem = (
+      .then(() => {
+        navigate("/");
+        toast.success("Sign Out Successful");
+      })
+      .catch((error) => {
+        toast.error("Something went wrong. Try again!");
+      });
+  };
+
+  const navItems = (
     <>
       <li>
-        <ActiveLink to='/'> Home</ActiveLink>
-       
+        <ActiveLink to="/">Home</ActiveLink>
       </li>
       <li>
-       <ActiveLink to='/instructors'>Instructors</ActiveLink>
+        <ActiveLink to="/instructors">Instructors</ActiveLink>
       </li>
       <li>
-        <ActiveLink to='/classes'>Classes</ActiveLink>
+        <ActiveLink to="/classes">Classes</ActiveLink>
       </li>
       <li>
-       {user &&  <ActiveLink to={`/dashboard/${isAdmin ? 'manage-classes' : isInstructor ? 'my-classes' : 'selected-classes'}`}>Dashboard</ActiveLink>}
+        {user && (
+          <ActiveLink
+            to={`/dashboard/${isAdmin ? "manage-classes" : isInstructor ? "my-classes" : "selected-classes"}`}
+          >
+            Dashboard
+          </ActiveLink>
+        )}
       </li>
       <div className="tooltip" data-tip={`${user?.displayName || ""}`}>
-    <div>
-              {user && (
-                <img
-                  src={user?.photoURL}
-                  alt="profile-photo"
-                  className="rounded-full w-14 h-14"
-                />
-              )}
-            </div>
-            </div>
-  
+        <div>
+          {user && (
+            <img
+              src={user?.photoURL}
+              alt="profile-photo"
+              className="rounded-full w-14 h-14"
+            />
+          )}
+        </div>
+      </div>
       <li>
-       {user?  <div className="flex justify-center"><button onClick={handleSignOut} className='btn btn-sm bg-[#86E5DC] text-black hover:link-accent hover:bg-black transition-all duration-700'>Logout</button></div> :  <ActiveLink to='/login'>Login</ActiveLink>}
+        {user ? (
+          <div className="flex justify-center">
+            <button
+              onClick={handleSignOut}
+              className="btn btn-sm bg-[#86E5DC] text-black hover:link-accent hover:bg-black transition-all duration-700"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <ActiveLink to="/login">Login</ActiveLink>
+        )}
       </li>
     </>
   );
-
-
 
   return (
     <div className="navbar bg-opacity-30 bg-black text-white max-w-screen-xl md:pt-5">
@@ -80,15 +93,15 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
           >
-            {navItem}
+            {navItems}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-2xl md:text-3xl styled-text md:w-2/3" >MelodyMakers Academy</a>
+        <a className="btn btn-ghost normal-case text-2xl md:text-3xl styled-text md:w-2/3">
+          MelodyMakers Academy
+        </a>
       </div>
       <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navItem}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
     </div>
   );

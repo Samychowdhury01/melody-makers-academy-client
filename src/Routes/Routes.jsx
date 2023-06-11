@@ -6,6 +6,7 @@ import AddAClass from "../Pages/Dashboad/AddAClass/AddAClass";
 import ManageClasses from "../Pages/Dashboad/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboad/ManageUsers/ManageUsers";
 import MyClasses from "../Pages/Dashboad/MyClasses/MyClasses";
+import Payment from "../Pages/Dashboad/Payment/Payment";
 import SelectedClasses from "../Pages/Dashboad/SelectedClasses/SelectedClasses";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "selected-classes",
         element:<StudentRoute> <SelectedClasses /></StudentRoute>,
+      },
+      {
+        path: "payment/:id",
+        element:<StudentRoute> <Payment /></StudentRoute>,
       },
       {
         path: "add-a-class",

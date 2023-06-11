@@ -12,7 +12,7 @@ const MyClasses = () => {
     enabled: !loading,
     queryFn: async () => {
       const response = await axiosSecure.get(`/classes/${user?.email}`);
-      return response;
+      return response.data;
     },
   });
   // TODO: have to add update functionalities

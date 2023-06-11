@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAdmin from "../../Hooks/useAdmin";
+import useUserRole from "../../Hooks/useUserRole";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useInstructor from "../../Hooks/useInstructor";
 
 const ClassCard = ({ classData }) => {
   const { user } = useAuth();
-  const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
-  const [axiosSecure] = useAxiosSecure()
+  const { isAdmin, isInstructor } = useUserRole();
+  const [axiosSecure] = useAxiosSecure();
   const navigate = useNavigate();
   const {
     _id,
@@ -23,13 +21,7 @@ const ClassCard = ({ classData }) => {
   } = classData;
 
   const handleSelect = (classInfo) => {
-    const {
-        _id,
-        className,
-        image,
-        instructorName,
-        price,
-      } = classInfo;
+    const { _id, className, image, instructorName, price } = classInfo;
     if (!user) {
       navigate("/login");
       Swal.fire({
@@ -37,24 +29,35 @@ const ClassCard = ({ classData }) => {
         title: "Sorry...",
         text: "You need to login first to select the class",
       });
-      return
+      return;
     }
-    const selectedClass = {email: user?.email, className, instructorName, image, price, classId: _id}
-    axiosSecure.post('/my-classes', selectedClass)
-    .then(response => {console.log(response)
-    if(response.insertedId){
+    const selectedClass = {
+      email: user?.email,
+      className,
+      instructorName,
+      image,
+      price,
+      classId: _id,
+    };
+    axiosSecure.post("/my-classes", selectedClass).then((response) => {
+      if (response?.data?.insertedId) {
         Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Congratulations! Successfully added to your list.",
-            showConfirmButton: false,
-          });
-    }
-    })
+          position: "center",
+          icon: "success",
+          title: "Congratulations! Successfully added to your list.",
+          showConfirmButton: false,
+        });
+      }
+    });
   };
+
   return (
     <>
-      <div className={`card glass ${!availableSeats && 'bg-red-500 bg-opacity-60'} text-white`}>
+      <div
+        className={`card glass ${
+          !availableSeats && "bg-red-500 bg-opacity-60"
+        } text-white`}
+      >
         <figure className="w-[300px] h-[300px] mx-auto p-5">
           <img
             src={image}

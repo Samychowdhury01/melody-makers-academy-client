@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+/* import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
@@ -10,7 +10,7 @@ const useAdmin = () => {
     enabled: !loading,
     queryFn: async () => {
       const response = await axiosSecure.get(`/users/role/${user?.email}`);
-      return response.admin;
+      return response.data.admin;
     },
   });
 
@@ -20,3 +20,4 @@ const useAdmin = () => {
 export default useAdmin;
 
 
+ */

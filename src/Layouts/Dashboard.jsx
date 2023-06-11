@@ -1,14 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import useAdmin from "../Hooks/useAdmin";
-import useInstructor from "../Hooks/useInstructor";
+import useUserRole from "../Hooks/useUserRole";
+
 
 const Dashboard = () => {
+  const { isAdmin, isInstructor } = useUserRole();
 
-
-
-    
-  const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -27,7 +23,7 @@ const Dashboard = () => {
         <ul className="menu p-4 w-80 h-full bg-[#1f1f1f] text-white">
           {/* Sidebar content here */}
           <li>
-            <Link to='/'>
+            <Link to="/">
               <div className="flex flex-col items-start text-white md:mb-10 styled-text">
                 <h1 className="styled-text md:text-2xl font-extrabold">
                   MelodyMakers
@@ -102,7 +98,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/"
+                  to="/dashboard/selected-classes"
                   className={({ isActive }) =>
                     `text-lg normal-case ${
                       isActive ? "bg-[#86E5DC] text-black" : ""
@@ -114,7 +110,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink
-                  to="/"
+                  to="/enrolled-classes"
                   className={({ isActive }) =>
                     `text-lg normal-case hover:link-accent ${
                       isActive ? "bg-[#86E5DC] text-black" : ""
@@ -126,7 +122,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink
-                  to="/"
+                  to="/payment-history"
                   className={({ isActive }) =>
                     `text-lg normal-case hover:link-accent ${
                       isActive ? "bg-[#86E5DC] text-black" : ""

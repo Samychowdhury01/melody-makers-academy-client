@@ -1,51 +1,50 @@
-import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import Swal from 'sweetalert2';
-import useAuth from '../../../Hooks/useAuth';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 // TODO:have to implement delete and pay function
 const SelectedClasses = () => {
-    const {user, loading} =useAuth()
-    const [axiosSecure] = useAxiosSecure();
-    const { data: selectedClasses, refetch } = useQuery({
-      queryKey: ["selectedClasses"],
-      enabled: !loading,
-      queryFn: async () => {
-        const response = await axiosSecure.get(`/my-classes/${user?.email}`);
-        return response;
-      },
+  const { user, loading } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const { data: selectedClasses, refetch } = useQuery({
+    queryKey: ["selectedClasses"],
+    enabled: !loading,
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/my-classes/${user?.email}`);
+      return response.data;
+    },
+  });
+
+
+  // handle delete selected class
+  const handleDeleteClass = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/my-classes/${id}`).then((data) => {
+          if (data?.data?.deletedCount > 0) {
+            refetch();
+            Swal.fire("Deleted!", "Your item has been deleted.", "success");
+          }
+        });
+      }
     });
-    
+  };
 
-    // handle delete selected class
-    const handleDeleteClass =(id) => {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.delete(`/my-classes/${id}`)
-            .then((data) => {
-              if (data.deletedCount > 0) {
-                  refetch()
-                Swal.fire("Deleted!", "Your item has been deleted.", "success");
-              }
-            });
-        }
-      });
-    }
-
-
-    return (
-        <div className="relative h-[100vh] bg-base-300 ">
+  return (
+    <div className="relative h-[100vh] bg-base-300 ">
       <div className="overflow-x-auto px-4 py-10 center-div">
         <h1 className="text-4xl styled-text text-center mb-10">
-          my Selected Classes
+          My Selected Classes
         </h1>
         <table className="table  bg-base-300 drop-shadow-xl">
           {/* head */}
@@ -77,12 +76,21 @@ const SelectedClasses = () => {
                 <td>{selectedClass?.instructorName}</td>
                 <td>{selectedClass?.price}</td>
                 <td>
-                  <button className="btn btn-neutral btn-sm normal-case">Pay</button>
+                  <Link to={`/dashboard/payment/${selectedClass?._id}`}
+                  
+                  >
+                    <button className="btn btn-success btn-sm normal-case">
+                      Pay
+                    </button>
+                  </Link>
                 </td>
                 <td>
-                  <button 
-                  onClick={()=> handleDeleteClass(selectedClass?._id)}
-                  className="btn btn-error btn-sm normal-case">delete</button>
+                  <button
+                    onClick={() => handleDeleteClass(selectedClass?._id)}
+                    className="btn btn-error btn-sm normal-case"
+                  >
+                    delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -90,7 +98,7 @@ const SelectedClasses = () => {
         </table>
       </div>
     </div>
-    );
+  );
 };
 
 export default SelectedClasses;

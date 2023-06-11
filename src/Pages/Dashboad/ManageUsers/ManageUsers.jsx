@@ -11,14 +11,14 @@ const ManageUsers = () => {
     enabled: !loading,
     queryFn: async () => {
       const response = await axiosSecure.get("/users");
-      return response;
+      return response.data;
     },
   });
   
 const handleMakeAdmin = user =>{
   axiosSecure.patch(`/users/change-role?email=${user?.email}&role=admin`)
   .then(response => {
-    if (response.modifiedCount > 0) {
+    if (response.data.modifiedCount > 0) {
       refetch()
       Swal.fire({
           position: 'center',
@@ -33,7 +33,7 @@ const handleMakeAdmin = user =>{
 const handleMakeInstructor = user =>{
   axiosSecure.patch(`/users/change-role?email=${user?.email}&role=instructor`)
   .then(response => {
-    if (response.modifiedCount > 0) {
+    if (response.data.modifiedCount > 0) {
       refetch()
       Swal.fire({
           position: 'center',

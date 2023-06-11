@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+/* import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
@@ -11,10 +11,10 @@ const {isLoading : isStudentLoading, data : isStudent} = useQuery({
     enabled: !loading,
     queryFn: async () =>{
         const response = await axiosSecure.get(`/users/role/${user?.email}`)
-        return response.student
+        return response?.data?.student
     }
 })
 return [isStudent, isStudentLoading]
 };
 
-export default useStudent;
+export default useStudent; */

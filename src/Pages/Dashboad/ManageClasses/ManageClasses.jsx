@@ -13,7 +13,7 @@ const ManageClasses = () => {
     enabled: !loading,
     queryFn: async () => {
       const response = await axiosSecure.get("/classes");
-      return response;
+      return response.data;
     },
   });
 
