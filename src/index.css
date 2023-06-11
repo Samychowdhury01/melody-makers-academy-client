@@ -30,7 +30,7 @@ body{
     width: 100%;
 }
 
-.classes-bg{
+.parallax-bg{
     background-image: linear-gradient(0deg, rgba(21, 21, 21, 0.7), rgba(21, 21, 21, 0.7)), url('../src/assets/Home/Banner/banner4.jpg');
     background-repeat: no-repeat;
     background-position: center;

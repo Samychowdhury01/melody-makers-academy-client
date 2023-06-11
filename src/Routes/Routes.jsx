@@ -14,6 +14,7 @@ import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
+import StudentRoute from "./StudentRoute";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "selected-classes",
-        element: <SelectedClasses />,
+        element:<StudentRoute> <SelectedClasses /></StudentRoute>,
       },
       {
         path: "add-a-class",

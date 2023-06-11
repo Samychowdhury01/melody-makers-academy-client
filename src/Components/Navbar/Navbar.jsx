@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import useAuth from "../../Hooks/useAuth";
 import useInstructor from "../../Hooks/useInstructor";
@@ -9,9 +10,11 @@ const Navbar = () => {
   const {user, logOut} = useAuth()
   const [isAdmin] = useAdmin()
   const [isInstructor] = useInstructor()
+  const navigate = useNavigate()
   const handleSignOut = () =>{
     logOut()
     .then(() =>{
+      navigate('/')
       toast.success('Sign Out Successful')
     })
     .catch(error =>{

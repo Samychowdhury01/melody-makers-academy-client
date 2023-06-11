@@ -3,11 +3,14 @@ import React from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FcApproval, FcCancel } from "react-icons/fc";
+import useAuth from "../../../Hooks/useAuth";
 // TODO: have to add icons
 const ManageClasses = () => {
+  const{loading} = useAuth()
   const [axiosSecure] = useAxiosSecure();
   const { data: classes, refetch } = useQuery({
     queryKey: ["classes"],
+    enabled: !loading,
     queryFn: async () => {
       const response = await axiosSecure.get("/classes");
       return response;
