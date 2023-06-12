@@ -68,11 +68,11 @@ const Navbar = () => {
       </li>
     </>
   );
-
+console.log('error')
   return (
     <div className="navbar bg-opacity-30 bg-black text-white max-w-screen-xl md:pt-5">
       <div className="navbar-start">
-        <div className="dropdown">
+        <div className="dropdown z-10">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
