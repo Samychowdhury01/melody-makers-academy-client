@@ -5,11 +5,11 @@ import useUserRole from "../Hooks/useUserRole";
 import useAuth from "../Hooks/useAuth";
 
 const AdminRoute = ({ children }) => {
-  const { isAdmin, isLoading: isAdminLoading } = useUserRole();
-  const { user, loading: authLoading } = useAuth();
+  const { isAdmin,  isAdminLoading } = useUserRole();
+  const { user, loading} = useAuth();
   const location = useLocation();
 
-  if (authLoading || isAdminLoading) {
+  if (loading || isAdminLoading) {
     return (
       <div className="flex items-center justify-center h-[100vh]">
         <img src={spinner} alt="loading-image" />

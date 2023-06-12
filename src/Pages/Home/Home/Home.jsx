@@ -5,6 +5,7 @@ import InstructorCard from "../../../Components/instructorCard/InstructorCard";
 import useClasses from "../../../Hooks/useClasses";
 import useInstructors from "../../../Hooks/useInstructors";
 import Banner from "../Banner/Banner";
+import Reviews from "../Reviews/Reviews";
 
 const Home = () => {
   const { classes } = useClasses();
@@ -45,6 +46,10 @@ const Home = () => {
             See Our Instructors
           </Link>
         </div>
+      </div>
+
+      <div className="my-32">
+        <Reviews/>
       </div>
     </>
   );

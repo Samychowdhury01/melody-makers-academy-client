@@ -4,7 +4,7 @@ const InstructorCard = ({ instructor }) => {
   const { _id, image, email, name } = instructor;
   return (
     <>
-      <div className={"card glass text-white"}>
+      <div className="card glass text-white shadow-lg shadow-neutral-600">
         <figure className="w-[300px] h-[300px] mx-auto p-5">
           <img
             src={image}

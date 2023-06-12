@@ -54,7 +54,7 @@ const ClassCard = ({ classData }) => {
   return (
     <>
       <div
-        className={`card glass ${
+        className={`card glass shadow-lg shadow-neutral-600 ${
           !seats && "bg-red-500 bg-opacity-60"
         } text-white`}
       >

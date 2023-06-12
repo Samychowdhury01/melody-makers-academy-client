@@ -44,7 +44,7 @@ const Register = () => {
         axios.post(img_hosting_url, formData).then((imgData) => {
           const image = imgData.data.data.display_url;
           if (imgData.data.success) {
-            updateUserProfile(email, image).then(() => {
+            updateUserProfile(name, image).then(() => {
               const createdUser = { email, name, image, role: "student" };
               axios
                 .post("http://localhost:5000/users", createdUser)

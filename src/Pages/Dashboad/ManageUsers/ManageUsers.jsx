@@ -54,7 +54,7 @@ const ManageUsers = () => {
       <Helmet>
         <title>MelodyMakers Academy | Manage Users</title>
       </Helmet>
-      <div className="relative h-[100vh] bg-base-300 ">
+      <div className="relative bg-base-300 h-full">
         <div className="overflow-x-auto px-4 py-10 center-div">
           <h1 className="text-4xl styled-text text-center mb-10">All Users</h1>
           <table className="table  bg-base-300 drop-shadow-xl">

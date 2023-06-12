@@ -68,7 +68,7 @@ const Navbar = () => {
       </li>
     </>
   );
-console.log('error')
+
   return (
     <div className="navbar bg-opacity-30 bg-black text-white max-w-screen-xl md:pt-5">
       <div className="navbar-start">
