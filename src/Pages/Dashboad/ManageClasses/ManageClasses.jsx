@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FcApproval, FcCancel } from "react-icons/fc";
 import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 // TODO: have to add icons
 const ManageClasses = () => {
   const{loading} = useAuth()
@@ -89,6 +90,12 @@ const ManageClasses = () => {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>
+        MelodyMakers Academy | Manage Classes
+      </title>
+    </Helmet>
     <div className="relative min-h-screen bg-base-300">
       <div className="px-4 py-10 center-div md:px-8 lg:px-12">
         <h1 className="text-4xl styled-text text-center mb-10">
@@ -172,6 +179,7 @@ const ManageClasses = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 
+import { Helmet } from 'react-helmet-async';
 import InstructorCard from '../../Components/instructorCard/InstructorCard';
 import useInstructors from '../../Hooks/useInstructors';
 
@@ -6,6 +7,11 @@ const Instructors = () => {
     const {instructors} = useInstructors()
     return (
       <>
+      <Helmet>
+        <title>
+          MelodyMakers Academy | Instructors
+        </title>
+      </Helmet>
         <div>
           <h1 className="text-[#86E5DC] text-5xl font-semibold text-center mt-16">
             Meet Our Instructors

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
@@ -9,14 +10,13 @@ const SelectedClasses = () => {
   const { user, loading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const { data: selectedClasses, refetch } = useQuery({
-    queryKey: ["selectedClasses"],
+    queryKey: ["selectedClasses", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const response = await axiosSecure.get(`/my-classes/${user?.email}`);
       return response.data;
     },
   });
-
 
   // handle delete selected class
   const handleDeleteClass = (id) => {
@@ -42,6 +42,9 @@ const SelectedClasses = () => {
 
   return (
     <div className="relative h-[100vh] bg-base-300 ">
+      <Helmet>
+        <title>MelodyMakers Academy | Selected Classes</title>
+      </Helmet>
       <div className="overflow-x-auto px-4 py-10 center-div">
         <h1 className="text-4xl styled-text text-center mb-10">
           My Selected Classes
@@ -76,9 +79,7 @@ const SelectedClasses = () => {
                 <td>{selectedClass?.instructorName}</td>
                 <td>{selectedClass?.price}</td>
                 <td>
-                  <Link to={`/dashboard/payment/${selectedClass?._id}`}
-                  
-                  >
+                  <Link to={`/dashboard/payment/${selectedClass?._id}`}>
                     <button className="btn btn-success btn-sm normal-case">
                       Pay
                     </button>

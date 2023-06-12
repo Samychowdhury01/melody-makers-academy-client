@@ -110,7 +110,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink
-                  to="/enrolled-classes"
+                  to="/dashboard/enrolled-classes"
                   className={({ isActive }) =>
                     `text-lg normal-case hover:link-accent ${
                       isActive ? "bg-[#86E5DC] text-black" : ""
@@ -122,7 +122,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink
-                  to="/payment-history"
+                  to="/dashboard/payment-history"
                   className={({ isActive }) =>
                     `text-lg normal-case hover:link-accent ${
                       isActive ? "bg-[#86E5DC] text-black" : ""

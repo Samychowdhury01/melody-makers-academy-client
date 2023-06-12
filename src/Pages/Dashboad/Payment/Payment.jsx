@@ -30,8 +30,10 @@ const Payment = () => {
   const price = parseInt(singleClass?.price)
 
   return (
-    <div className="bg-base-300">
-      <h1>hi from payment</h1>
+    <div className="bg-base-300 h-screen border border-black">
+      <h1 className="text-4xl styled-text text-center my-10">
+          Make Payment
+        </h1>
       <div>
         <Elements stripe={stripePromise}>
           <CheckoutForm price={price}

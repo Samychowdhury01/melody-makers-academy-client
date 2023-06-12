@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
@@ -63,6 +64,9 @@ const AddAClass = () => {
 
   return (
     <>
+    <Helmet>
+        <title>MelodyMakers Academy | Add A Class</title>
+      </Helmet>
       <div className="hero min-h-screen">
         <div className="hero-content md:w-full p-4 md:p-10">
           <div className="card md:w-full shadow-2xl shadow-neutral-600 bg-base-300">

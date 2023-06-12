@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import './CheckoutForm.css'
 
 
 const CheckoutForm = ({ classInfo, price }) => {
@@ -82,7 +83,6 @@ const CheckoutForm = ({ classInfo, price }) => {
       };
 
       axiosSecure.post("/payments", payment).then((res) => {
-console.log(res.data)
         if (res.data.paymentInfo.insertedId) {
           Swal.fire({
             position: "center",
@@ -96,24 +96,28 @@ console.log(res.data)
   };
 
   return (
-      <div className="w-2/3 mx-auto h-screen">
+      <div className="w-1/2 mx-auto h-[50vh] checkout-style">
         <form onSubmit={handleSubmit}>
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
-                  },
-                },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-          />
+        <CardElement
+    options={{
+      style: {
+        base: {
+          fontSize: "16px",
+          color: "#424770",
+          "::placeholder": {
+            color: "#aab7c4",
+          },
+          border: "1px solid #9e2146", // Add border color
+          boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)", // Add box shadow
+          padding: "0.75rem", // Add padding
+          borderRadius: "0.375rem", // Add border radius
+        },
+        invalid: {
+          color: "#9e2146",
+        },
+      },
+    }}
+  />
           <div className="text-center mt-10">
           <button
             className="btn bg-[#86E5DC] text-black  rounded-3xl hover:bg-[#1f1f1f] hover:text-[#86E5DC] transition-all duration-500"
