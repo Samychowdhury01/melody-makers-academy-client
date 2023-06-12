@@ -16,7 +16,7 @@ const ClassCard = ({ classData }) => {
     image,
     instructorName,
     instructorEmail,
-    availableSeats,
+     seats,
     price,
   } = classData;
 
@@ -55,7 +55,7 @@ const ClassCard = ({ classData }) => {
     <>
       <div
         className={`card glass ${
-          !availableSeats && "bg-red-500 bg-opacity-60"
+          !seats && "bg-red-500 bg-opacity-60"
         } text-white`}
       >
         <figure className="w-[300px] h-[300px] mx-auto p-5">
@@ -79,7 +79,7 @@ const ClassCard = ({ classData }) => {
           </p>
           <p>
             <span className="font-semibold text-lg mr-2">Available Seats:</span>
-            {availableSeats || 0}
+            {seats || 0}
           </p>
           <p>
             <span className="font-semibold text-lg mr-2">Price:</span>${price}
@@ -88,7 +88,7 @@ const ClassCard = ({ classData }) => {
             <button
               onClick={() => handleSelect(classData)}
               className="btn bg-[#86E5DC] text-black rounded-3xl hover:bg-[#1f1f1f] hover:text-[#86E5DC] transition-all duration-500"
-              disabled={isAdmin || isInstructor || !availableSeats}
+              disabled={isAdmin || isInstructor || !seats}
             >
               Select the Class
             </button>

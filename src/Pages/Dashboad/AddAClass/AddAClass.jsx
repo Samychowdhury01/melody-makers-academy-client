@@ -5,9 +5,9 @@ import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 const AddAClass = () => {
-  const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const {
@@ -42,10 +42,11 @@ const AddAClass = () => {
           seats,
           price,
           status: "pending",
-          totalEnroll: 0
+          totalEnroll: 0,
         };
-        console.log(classData)
+        console.log(classData);
         axiosSecure.post("/classes", classData).then((data) => {
+          console.log(data.data);
           if (data?.data?.insertedId) {
             reset();
             Swal.fire({
@@ -58,7 +59,6 @@ const AddAClass = () => {
         });
       }
     });
-
   };
 
   return (
@@ -67,7 +67,7 @@ const AddAClass = () => {
         <div className="hero-content md:w-full p-4 md:p-10">
           <div className="card md:w-full shadow-2xl shadow-neutral-600 bg-base-300">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-                <h1 className="text-4xl styled-text text-center">Add A class</h1>
+              <h1 className="text-4xl styled-text text-center">Add A class</h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Class name</span>

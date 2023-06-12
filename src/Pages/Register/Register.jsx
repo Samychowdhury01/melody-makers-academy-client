@@ -47,7 +47,7 @@ const Register = () => {
             updateUserProfile(email, image).then(() => {
               const createdUser = { email, name, image, role: "student" };
               axios
-                .post("http://localhost:5000/users", createdUser)
+                .post("https://melody-makers-server.vercel.app/users", createdUser)
                 .then((data) => {
                   if (data.data.insertedId) {
                     reset();

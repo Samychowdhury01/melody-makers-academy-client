@@ -20,7 +20,7 @@ const SocialLogin = () => {
           email: loggedInUser?.email,
           role: 'student'
         };
-        axiosSecure.post('http://localhost:5000/users', saveUser)
+        axiosSecure.post('https://melody-makers-server.vercel.app/users', saveUser)
         .then(() =>{ 
           toast.success("Login successful");
           navigate(location?.state?.from?.pathname || "/"); 

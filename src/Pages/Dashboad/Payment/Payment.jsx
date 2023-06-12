@@ -1,7 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -13,13 +12,18 @@ const Payment = () => {
   const { user, loading } = useAuth();
   const { id } = useParams();
   const [axiosSecure] = useAxiosSecure();
-  const { data: singleClass } = useQuery({
-    queryKey: ["singleClass"],
+  const { data: singleClass= false } = useQuery({
+    queryKey: ["singleClass", user?.email, id],
     enabled: !loading,
     queryFn: async () => {
+     if(user){
       const response = await axiosSecure.get(`/my-classes/${user?.email}`);
       const classesInfo = response?.data?.find((classInfo) => classInfo?._id === id);
-      return classesInfo;
+      return classesInfo ?? false;
+     }
+     else{
+      return false
+     }
     },
   });
 

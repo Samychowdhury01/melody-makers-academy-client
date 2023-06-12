@@ -10,8 +10,12 @@ const useUserRole = () => {
     queryKey: ["isAdmin", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const response = await axiosSecure.get(`/users/role/${user?.email}`);
-      return response?.data?.admin ?? false;
+      if (user) {
+        const response = await axiosSecure.get(`/users/role/${user?.email}`);
+        return response?.data?.admin ?? false;
+      } else {
+        return false;
+      }
     },
   });
 
@@ -20,8 +24,12 @@ const useUserRole = () => {
       queryKey: ["isInstructor", user?.email],
       enabled: !loading,
       queryFn: async () => {
-        const response = await axiosSecure.get(`/users/role/${user?.email}`);
-        return response?.data?.instructor ?? false;
+        if (user) {
+          const response = await axiosSecure.get(`/users/role/${user?.email}`);
+          return response?.data?.instructor ?? false;
+        } else {
+          return false;
+        }
       },
     });
 
@@ -29,8 +37,12 @@ const useUserRole = () => {
     queryKey: ["isStudent", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const response = await axiosSecure.get(`/users/role/${user?.email}`);
-      return response?.data?.student ?? false;
+      if (user) {
+        const response = await axiosSecure.get(`/users/role/${user?.email}`);
+        return response?.data?.student ?? false;
+      } else {
+        return false;
+      }
     },
   });
 

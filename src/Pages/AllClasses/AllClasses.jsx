@@ -5,7 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 const AllClasses = () => {
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/approved-classes")
+    fetch("https://melody-makers-server.vercel.app/approved-classes")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
