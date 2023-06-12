@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+
 import ClassCard from "../../Components/ClassCard/ClassCard";
-import useAuth from "../../Hooks/useAuth";
+
+import useClasses from "../../Hooks/useClasses";
 
 const AllClasses = () => {
-  const [classes, setClasses] = useState([]);
-  useEffect(() => {
-    fetch("https://melody-makers-server.vercel.app/approved-classes")
-      .then((res) => res.json())
-      .then((data) => setClasses(data));
-  }, []);
+  const {classes} = useClasses()
   return (
     <>
       <div>

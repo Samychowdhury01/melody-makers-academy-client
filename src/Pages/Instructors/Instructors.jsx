@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
+
 import InstructorCard from '../../Components/instructorCard/InstructorCard';
+import useInstructors from '../../Hooks/useInstructors';
 
 const Instructors = () => {
-    const [instructors, setInstructors] = useState([]);
-    useEffect(() => {
-      fetch("https://melody-makers-server.vercel.app/users/instructors")
-        .then((res) => res.json())
-        .then((data) => setInstructors(data));
-    }, []);
+    const {instructors} = useInstructors()
     return (
       <>
         <div>
